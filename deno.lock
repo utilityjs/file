@@ -43,6 +43,7 @@
   "remote": {},
   "workspace": {
     "dependencies": [
+      "jsr:@std/assert@^0.220.1",
       "jsr:@std/fs@^0.229.1",
       "jsr:@std/path@^0.225.1"
     ]
