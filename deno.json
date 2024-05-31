@@ -1,6 +1,6 @@
 {
   "name": "@utility/file",
-  "version": "0.1.0",
+  "version": "0.1.1-pre.0",
   "tasks": {
     "coverage": "deno task test --coverage=./dist/coverage && deno coverage --include=src --lcov ./dist/coverage > ./dist/coverage/lcov.info",
     "test": "deno test --allow-read --allow-write"
