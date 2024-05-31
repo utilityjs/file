@@ -6,16 +6,13 @@
 [![Coverage](https://codecov.io/gh/utilityjs/date/branch/main/graph/badge.svg?token=OzlniGFmNp)](https://codecov.io/gh/utilityjs/date)
 [![License](https://img.shields.io/github/license/utilityjs/date.svg?label=License)](/LICENSE)
 
-Collection of date utility functions
+Collection of file utility functions
 
 ## Usage
 
 ```typescript
-import { isISODate } from "@utility/date";
+import { exists } from "@utility/file";
 
-isISODate("2022-12-27T07:40:25.551Z");
+await exists("./filename.txt");
 // => true
-
-isISODate("25/12/2022");
-// => false
 ```
