@@ -1,0 +1,25 @@
+{
+  "name": "@utility/file",
+  "version": "0.0.1",
+  "tasks": {
+    "coverage": "deno task test --coverage=./dist/coverage && deno coverage --include=src --lcov ./dist/coverage > ./dist/coverage/lcov.info",
+    "test": "deno test --allow-read --allow-write"
+  },
+  "exports": "./mod.ts",
+  "exclude": [
+    "dist",
+    ".run",
+    ".github/",
+    "version.json",
+    "test_deps.ts"
+  ],
+  "publish": {
+    "exclude": [
+      "test/"
+    ]
+  },
+  "imports": {
+    "@std/fs": "jsr:@std/fs@^0.229.1",
+    "@std/path": "jsr:@std/path@^0.225.1"
+  }
+}
