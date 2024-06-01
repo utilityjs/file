@@ -7,7 +7,8 @@
       "jsr:@std/fmt@^0.220.1": "jsr:@std/fmt@0.220.1",
       "jsr:@std/fs@^0.229.1": "jsr:@std/fs@0.229.1",
       "jsr:@std/path@^0.225.1": "jsr:@std/path@0.225.1",
-      "jsr:@std/testing@^0.220.1": "jsr:@std/testing@0.220.1"
+      "jsr:@std/testing@^0.220.1": "jsr:@std/testing@0.220.1",
+      "jsr:@utility/types@^0.4.0": "jsr:@utility/types@0.4.0"
     },
     "jsr": {
       "@std/assert@0.220.1": {
@@ -37,6 +38,9 @@
       },
       "@std/testing@0.220.1": {
         "integrity": "be77cc1df543f70217d450612637f9f6fcc6887f19fca89665ce08456ee1f290"
+      },
+      "@utility/types@0.4.0": {
+        "integrity": "6853c8e37b630a62753022ad723bb961d39d76d96a4d2a0a5ba82a14f341b718"
       }
     }
   },
@@ -45,7 +49,9 @@
     "dependencies": [
       "jsr:@std/assert@^0.220.1",
       "jsr:@std/fs@^0.229.1",
-      "jsr:@std/path@^0.225.1"
+      "jsr:@std/path@^0.225.1",
+      "jsr:@std/testing@^0.220.1",
+      "jsr:@utility/types@^0.4.0"
     ]
   }
 }
