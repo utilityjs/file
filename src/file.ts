@@ -1,5 +1,6 @@
-import {JSONArray, JSONObject} from "@utility/types";
+import {JSONObject} from "@utility/types";
 import {copy as fsCopy, expandGlob} from "@std/fs";
+import * as path from "@std/path";
 
 /**
  * Checks if a file or directory exists at the given path.
@@ -96,6 +97,13 @@ export async function writeTextFile(
   await Deno.writeTextFile(filePath, content);
 }
 
+export async function writeTextFileRecursive(
+  filePath: string,
+  content: string,
+): Promise<void> {
+  await Deno.writeTextFile(filePath, content, { create: true });
+}
+
 export async function writeJsonFile(
   filePath: string,
   object: JSONObject,
@@ -108,4 +116,68 @@ export async function copy(
   destinationPath: string,
 ): Promise<void> {
   await fsCopy(sourcePath, destinationPath);
+}
+
+export async function unZip(
+  zipSourcePath: string,
+  destinationPath: string,
+): Promise<boolean> {
+  let unzipCommandProcess;
+  if (Deno.build.os === "windows") {
+    unzipCommandProcess = new Deno.Command("PowerShell", {
+      args: [
+        "Expand-Archive",
+        "-Path",
+        zipSourcePath,
+        "-DestinationPath",
+        destinationPath,
+      ],
+      // You might want to pipe stdout/stderr if you need to capture output
+      stdout: "piped",
+      stderr: "piped",
+    });
+  } else {
+    unzipCommandProcess = new Deno.Command("unzip", {
+      args: [zipSourcePath, "-d", destinationPath],
+      stdout: "piped",
+      stderr: "piped",
+    });
+  }
+
+  const output = await unzipCommandProcess.output();
+
+  return output.success;
+}
+
+
+export async function unZipFromURL(downloadUrl: URL, destinationPath: string) {
+  if (!await exists(destinationPath)) {
+    await mkdirRecursive(destinationPath);
+  }
+
+  const tempFilePath = await __downloadFileToTemp(
+    downloadUrl,
+    destinationPath
+  );
+
+  await unZip(tempFilePath, destinationPath);
+
+  // remove the temp file
+  await Deno.remove(tempFilePath);
+}
+
+async function __downloadFileToTemp(downloadUrl: URL, destinationPath: string) {
+  const response = await fetch(downloadUrl.href);
+
+  if (!response.body) {
+    throw new Error("Response body is null");
+  }
+
+  const tempFilePath = path.join(destinationPath, "_temp_.zip");
+
+  const file = await Deno.open(tempFilePath, { write: true, create: true });
+  await response.body.pipeTo(file.writable);
+  console.log(`File successfully downloaded to ${destinationPath}`);
+
+  return tempFilePath;
 }

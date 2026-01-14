@@ -1,6 +1,6 @@
 import * as path from "@std/path";
 import {afterAll, assertEquals, beforeAll, describe, it,} from "../test_deps.ts";
-import {copy, exists, mkdirRecursive, readJsonFile, readJsonFilesFromPath, readTextFile, removeRecursive, writeJsonFile, writeTextFile,} from "../mod.ts";
+import {copy, exists, mkdirRecursive, readJsonFile, readJsonFilesFromPath, readTextFile, removeRecursive, unZipFromURL, writeJsonFile, writeTextFile,} from "../mod.ts";
 
 const TEST_RESOURCES_PATH = path.normalize(import.meta.dirname + "/resources");
 
@@ -84,9 +84,9 @@ describe({
       assertEquals(objs[1].title, "b");
     });
 
-    /*it("#unZipFromURL()", async () => {
+    it("#unZipFromURL()", async () => {
       await mkdirRecursive(path.join(`${TEST_RESOURCES_PATH}/.temp`));
-      await await unZipFromURL(
+      await unZipFromURL(
         new URL("./resources/compress.zip", import.meta.url),
         path.join(`${TEST_RESOURCES_PATH}/.temp/uncompressed`),
       );
@@ -102,6 +102,6 @@ describe({
         ),
         true,
       );
-    });*/
+    });
   },
 });

@@ -1,9 +1,9 @@
 {
   "name": "@utility/file",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "tasks": {
     "coverage": "deno task test --coverage=./dist/coverage && deno coverage --include=src --lcov ./dist/coverage > ./dist/coverage/lcov.info",
-    "test": "deno test --allow-read --allow-write"
+    "test": "deno test --allow-read --allow-write --allow-run"
   },
   "exports": "./mod.ts",
   "exclude": [
